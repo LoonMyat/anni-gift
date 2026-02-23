@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <link rel="stylesheet" href="../css/kiss.css">
+</head>
+<body>
+    <div id="blinking-hearts-layer"></div>
+    <!-- Video Modal Container -->
+<div id="video-modal" class="glass-modal">
+    <div class="video-content">
+        <!-- Local Video Example -->
+        <video id="my-video" autoplay muted loop>
+            <source src="../songs/kiss.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+<div class="back_button">
+        <a href="clickme.html" class="back">BACK</a>
+    </div>
+
+<script>
+    function createBlinkingHearts() {
+    const layer = document.getElementById('blinking-hearts-layer');
+    const heartCount = window.innerWidth < 600 ? 15 : 30; // Fewer for mobile performance
+
+    for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'blink-heart';
+        heart.innerHTML = '💋'; // Or use a pixel heart SVG
+        
+        // Random Position
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        
+        // Random Size for depth
+        const size = Math.random() * 20 + 15;
+        heart.style.fontSize = size + 'px';
+        
+        // Randomize the blink timing so it feels natural
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+
+        layer.appendChild(heart);
+    }
+}
+
+// Initialize on load
+window.addEventListener('load', createBlinkingHearts);
+
+</script>
+</body>
+</html>

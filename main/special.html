@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/special.css">
+</head>
+<body>
+    <div id="heart-star-layer"></div>
+    <!-- Top Left Back Button -->
+    <a class="back-corner-btn" href="clickme.html">
+        <span>←</span>
+    </a>
+    <div class="scroll-wrapper" onclick="unrollScroll()">
+    <div class="scroll-container" id="myScroll">
+        <!-- Top Wood Stick -->
+        <div class="roller top"></div>
+        
+        <!-- The Paper that expands -->
+        <div class="paper">
+            <div class="scroll-content">
+                <h2>My Dearest,</h2>
+                <p>
+                    Every moment with you is like a beautiful story unfolding. 
+                    Happy Anniversary to the person who makes my world complete. 
+                    I love you more with every single day that passes.
+                </p>
+                <p class="signature">— Yours Always</p>
+            </div>
+        </div>
+
+        <!-- Bottom Wood Stick -->
+        <div class="roller bottom"></div>
+    </div>
+</div>
+
+<script>
+    function unrollScroll() {
+    const scroll = document.getElementById('myScroll');
+    if (!scroll.classList.contains('open')) {
+        scroll.classList.add('open');
+        
+        // Optional: Add a slight camera zoom
+        scroll.style.transform = "scale(1.1)";
+    }
+}
+
+function generateTwinklingHearts() {
+    const layer = document.getElementById('heart-star-layer');
+    const heartCount = window.innerWidth < 600 ? 20 : 45;
+
+    for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'twinkle-heart';
+        heart.innerHTML = '❤';
+
+        // 1. Random Position
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+
+        // 2. Random Size (Small sparkles look best)
+        const size = Math.random() * 15 + 8;
+        heart.style.fontSize = size + 'px';
+
+        // 3. Random Twinkle Duration (3s to 6s for a slow shimmer)
+        const duration = (Math.random() * 3 + 3) + 's';
+        heart.style.setProperty('--duration', duration);
+
+        // 4. Random Start Delay
+        heart.style.animationDelay = Math.random() * 5 + 's';
+
+        layer.appendChild(heart);
+    }
+}
+
+window.addEventListener('load', generateTwinklingHearts);
+
+
+
+</script>
+
+</body>
+</html>

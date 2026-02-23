@@ -1,0 +1,158 @@
+:root {
+    --scroll-paper: #fdf5e6; /* Old paper aesthetic */
+    --scroll-wood: #4b2c20;  /* Dark wood for rollers */
+    --neon-pink: #ff69b4;
+}
+
+body {
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.scroll-container {
+    position: relative;
+    width: 320px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease;
+}
+
+/* THE WOODEN ROLLERS */
+.roller {
+    width: 360px;
+    height: 25px;
+    /* background: var(--scroll-wood); */
+    /* background-color: #fff; */
+    background-color: rgba(255, 119, 187, 0.721); /* Soft Pink */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+/* THE PAPER */
+.paper {
+    width: 320px;
+    height: 0; /* Starts closed */
+    background: linear-gradient(transparent, rgba(25, 25, 25, 1));
+    overflow: hidden;
+    transition: height 2s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+    border: 1px solid #ff69b4;
+}
+
+/* CLICKED STATE: UNROLL */
+.scroll-container.open .paper {
+    height: 350px; /* Final length of the letter */
+}
+
+/* CONTENT STYLING */
+.scroll-content {
+    padding: 40px 30px;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 1s ease 1s; /* Fades in after unrolling starts */
+}
+
+.scroll-container.open .scroll-content {
+    opacity: 1;
+}
+
+h2 { font-family: 'Pacifico', cursive; color: var(--neon-pink); margin-bottom: 20px; }
+p { line-height: 1.8; font-size: 15px; }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 480px) {
+    .roller { width: 300px; }
+    .paper { width: 270px; }
+    .scroll-container.open .paper { height: 400px; }
+}
+
+
+#heart-star-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: -1;
+    background: #050505;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.twinkle-heart {
+    position: absolute;
+    color: #ff69b4;
+    opacity: 0;
+    /* Soft aesthetic blur */
+    filter: drop-shadow(0 0 5px #ff69b4);
+    animation: heartTwinkle var(--duration) infinite ease-in-out;
+}
+
+/* THE TWINKLE ANIMATION */
+@keyframes heartTwinkle {
+    0%, 100% { 
+        opacity: 0.1; 
+        transform: scale(0.9);
+        filter: drop-shadow(0 0 2px #ff69b4);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scale(1.1); 
+        /* Intense glow at the peak of the twinkle */
+        filter: drop-shadow(0 0 15px #ff1493) drop-shadow(0 0 30px #ff69b4);
+    }
+}
+
+
+
+.back-corner-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999; /* Higher than hearts and photos */
+    
+    background: rgba(255, 105, 180, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 105, 180, 0.4);
+    color: #ff69b4;
+    
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.back-corner-btn:hover {
+    background: rgba(255, 105, 180, 0.3);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+    transform: scale(1.05);
+}
+
+/* Mobile Tweak: Make it a bit smaller on phones */
+@media (max-width: 600px) {
+    .back-corner-btn {
+        top: 15px;
+        left: 15px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+}

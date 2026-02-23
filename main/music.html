@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <link rel="stylesheet" href="../css/music.css">
+</head>
+
+<body>
+
+    <div id="music-layer"></div>
+    <!-- Container for the List -->
+    <div class="list-wrapper">
+        <h2 class="list-title">Songs For You</h2>
+
+        <!-- This is where JS will build the list -->
+        <div id="memory-list-container"></div>
+
+        <div class="back_button">
+            <a href="clickme.html" class="back">BACK</a>
+        </div>
+
+        <!-- The hidden audio engine -->
+        <audio id="bg-music"></audio>
+
+        <!-- The Music Box UI -->
+        <div id="music-box" class="music-card">
+            <div class="music-info">
+                <span class="music-icon">♬</span>
+                <div id="song-name" class="text-glow">Selecting...</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+        // 1. Function to show the initial list
+        function showMemoryList(items) {
+            const container = document.getElementById('memory-list-container');
+            const ul = document.createElement('ul');
+            ul.className = 'aesthetic-ul';
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'list-item';
+                li.textContent = "♬ " + item.name; //♬💕
+
+                // --- THE ONCLICK FUNCTION ---
+                li.onclick = function () {
+                    const player = document.getElementById('bg-music');
+                    const songLabel = document.getElementById('song-name');
+                    const musicBox = document.getElementById('music-box');
+
+                    // 1. Update the song source and name
+                    player.src = item.audio;
+                    songLabel.innerText = "Playing: " + item.name;
+
+                    // 2. Show the box and play
+                    // musicBox.classList.add('show');
+                    player.play();
+
+                    // 3. Optional: Navigate after the song starts (delay 3s)
+                    // setTimeout(() => { window.location.href = item.url; }, 3000);
+                };
+
+                ul.appendChild(li);
+            });
+
+            container.appendChild(ul);
+        }
+
+        // DATA: Add your song paths here
+        const myLinks = [
+            { name: "Into You", url: "gift.html", audio: "../songs/IntoYou.mp3" },
+            { name: "All 4 Nothing", url: "summer.html", audio: "../songs/all4nothing.mp3" },
+            { name: "Every Breath You Take", url: "summer.html", audio: "../songs/EveryBreathYouTake.mp3" },
+            { name: "Anyone", url: "date.html", audio: "../songs/Anyone.mp3" },
+            { name: "Blue", url: "summer.html", audio: "../songs/blue.mp3" }
+            
+        ];
+
+        showMemoryList(myLinks);
+
+
+        function createMusicNote() {
+            const layer = document.getElementById('music-layer');
+            const note = document.createElement('div');
+            const symbols = ['♪','❤️', '♫', '♩'];
+
+            note.className = 'note';
+            // Pick a random music symbol
+            note.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+
+            // RANDOMIZE:
+            // 1. Position (left to right)
+            note.style.left = Math.random() * 100 + "vw";
+
+            // 2. Size (smaller on mobile)
+            const baseSize = window.innerWidth < 600 ? 15 : 25;
+            note.style.fontSize = (Math.random() * 10 + baseSize) + "px";
+
+            // 3. Falling Speed (3 to 7 seconds)
+            const duration = Math.random() * 4 + 3;
+            note.style.animationDuration = duration + "s";
+
+            // 4. Horizontal Wiggle (Optional extra "floating" feel)
+            note.style.marginLeft = (Math.random() * 40 - 20) + "px";
+
+            layer.appendChild(note);
+
+            // Remove from memory once it finishes falling
+            setTimeout(() => {
+                note.remove();
+            }, duration * 1000);
+        }
+
+        // Generate a note every 400ms
+        setInterval(createMusicNote, 300);
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

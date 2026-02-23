@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <link rel="stylesheet" href="../css/clickme.css">
+</head>
+
+<body>
+    <div id="heart-layer" class="heart-bg-layer"></div>
+    <h2>YOUR TICKETS</h2>
+    <div class="container">
+        <a href="special.html">
+            <img class="special" src="../images/special.png">
+        </a>
+        <a href="kiss.html">
+            <img class="kiss" src="../images/kisses.png">
+        </a>
+        <a href="memory.html">
+            <img class="memo" src="../images/memo.png">
+        </a>
+        <a href="music.html">
+            <img class="music" src="../images/music.png">
+        </a>
+        
+    </div>
+    <div class="back_button">
+        <a href="home.html" class="back">BACK</a>
+    </div>
+
+    <script>
+        function createHeart() {
+            const layer = document.getElementById('heart-layer');
+            const heart = document.createElement('div');
+            heart.className = 'pixel-heart';
+
+            // Randomize position and speed
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+            heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`; // Random sizes
+
+            layer.appendChild(heart);
+
+            // Remove to save memory
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+
+        // Create a heart every 400ms
+        setInterval(createHeart, 400);
+
+    </script>
+</body>
+
+</html>

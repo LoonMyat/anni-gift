@@ -1,0 +1,191 @@
+body {
+    background-color: #000;
+}
+
+.list-wrapper {
+    position: absolute;
+    top: 30px; /* Positioned below the heart */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 350px;
+    z-index: 20;
+    text-align: center;
+}
+
+.list-title {
+    color: #ff69b4;
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 40px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #ff69b4;
+    margin-bottom: 50px;
+}
+
+.aesthetic-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    background: rgba(255, 105, 180, 0.1);
+    backdrop-filter: blur(8px); /* Glass effect */
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    color: #fff;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.list-item:hover {
+    background: rgba(255, 105, 180, 0.2);
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Input Styling */
+.input-group {
+    margin-top: 15px;
+    display: flex;
+    gap: 5px;
+}
+
+#item-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ff69b4;
+    border-radius: 5px;
+    color: white;
+    padding: 8px;
+    flex: 1;
+}
+
+button {
+    background: #ff69b4;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#music-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    pointer-events: none; /* Crucial: let users click buttons through this layer */
+    z-index: -1; /* Behind everything */
+    overflow: hidden;
+}
+
+.note {
+    position: absolute;
+    color: #ff69b4; /* Pink notes */
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+    user-select: none;
+    /* Starting position above the screen */
+    top: -50px; 
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        /* Falls past the bottom of the screen */
+        transform: translateY(110dvh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.back_button {
+    margin-top: 150px;
+}
+
+
+.back {
+    text-decoration: none;
+    background: rgba(255, 105, 180, 0.1);
+    backdrop-filter: blur(8px); /* Glass effect */
+    border: 1px solid rgba(255, 105, 180, 0.3);
+    color: #fff;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+    animation: slideIn 0.5s ease-out forwards;
+}
+.back:hover {
+    transform: scale(1.1); /* Makes it larger */
+  background-color: #ff69b4;
+  box-shadow: 0 0 20px #ff69b4; /* Pink neon glow */
+}
+
+.music-card {
+    position: fixed;
+    bottom: 50px; /* Hidden off-screen initially */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    background: rgba(255, 105, 180, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 105, 180, 0.4);
+    border-radius: 50px; /* Rounded pill shape */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+/* Class to slide it up */
+.music-card.show {
+    bottom: 30px; 
+}
+
+.text-glow {
+    color: white;
+    font-size: 12px;
+    font-family: sans-serif;
+    text-shadow: 0 0 5px #ff69b4;
+}
+
+.music-icon{
+    color: #fff;
+}
+
+
+#play-btn {
+    background: #ff69b4;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}

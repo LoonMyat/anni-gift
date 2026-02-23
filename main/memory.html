@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/memory.css">
+</head>
+
+<body>
+    <div id="star-layer"></div>
+    <!-- Top Left Back Button -->
+    <a class="back-corner-btn" href="clickme.html">
+        <span>←</span>
+    </a>
+
+    <div class="gallery-wrapper">
+        <h2 id="gallery-title" class="title">Our Memories</h2>
+
+        <!-- The Hanging Wall -->
+        <div id="photo-wall" class="hanging-rack">
+            <!-- Photos will be injected here by JS -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-container">
+            <button class="nav-btn" onclick="prevPage()">← Back</button>
+            <button class="nav-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Organize your memories into pages
+        const galleryPages = [
+            {
+                title: "How it Started",
+                photos: ["../images/p1.jpg", "../images/p4.jpg", "../images/p7.jpg", "../images/p11.jpg", "../images/p9.jpg", "../images/p5.jpg", "../images/p12.jpg"]
+            },
+            {
+                title: "Summer Memories",
+                photos: ["../images/p8.jpg", "../images/p16.jpg", "../images/p6.jpg", "../images/p17.jpg", "../images/p20.jpg", "../images/p21.jpg", "../images/p26.jpg"]
+            },
+            {
+                title: "Latest Adventures",
+                photos: ["../images/p31.jpg", "../images/p28.jpg", "../images/p10.jpg", "../images/p30.jpg", "../images/p14.jpg", "../images/p3.jpg", "../images/p29.jpg"]
+            },
+            {
+                title: "Latest Adventures",
+                photos: ["../images/p17.jpg", "../images/p15.jpg", "../images/p27.jpg", "../images/p22.jpg", "../images/p24.jpg", "../images/p23.jpg", "../images/p18.jpg"]
+            }
+        ];
+
+        let currentPage = 0;
+
+        // 2. Function to render the photos
+        function renderWall() {
+            const wall = document.getElementById('photo-wall');
+            const pageData = galleryPages[currentPage];
+
+            // Fade out
+            wall.style.opacity = 0;
+
+            setTimeout(() => {
+                wall.innerHTML = ""; // Clear old photos
+                pageData.photos.forEach(src => {
+                    const card = document.createElement('div');
+                    card.className = 'polaroid';
+
+                    // Randomly tilt each card every time it loads
+                    const randomRotation = Math.floor(Math.random() * 10) - 5;
+                    // card.style.transform = `rotate(${randomRotation}deg)`;
+
+                    card.innerHTML = `<img src="${src}" alt="memory">`;
+                    wall.appendChild(card);
+                });
+
+                // Fade in
+                wall.style.opacity = 1;
+            }, 400);
+        }
+
+        // 3. Navigation Logic
+        function nextPage() {
+            if (currentPage < galleryPages.length - 1) {
+                currentPage++;
+                renderWall();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                renderWall();
+            }
+        }
+
+        // 4. LOAD FIRST PAGE AUTOMATICALLY
+        window.onload = renderWall;
+
+        function createStarfield() {
+    const layer = document.getElementById('star-layer');
+    const starCount = window.innerWidth < 600 ? 40 : 100;
+
+    for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'pixel-star';
+        
+        // Random Position
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 80 + 'vh';
+        
+        // Random Twinkle Speed
+        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+        star.style.animationDelay = Math.random() * 5 + 's';
+
+        layer.appendChild(star);
+    }
+}
+
+window.addEventListener('load', createStarfield);
+
+
+
+
+    </script>
+
+</body>
+
+</html>
