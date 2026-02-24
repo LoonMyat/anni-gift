@@ -1,17 +1,30 @@
-body{
+body {
     background-color: #000;
+    margin: 0;
+    padding: 0;
+    /* Centering logic */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* Removed margin-left: 30% */
 .glass-modal {
+    display: flex;
     justify-content: center;
-    margin-left: 30%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.video-content{
-    height: 330px;
-    margin-top: 12%;
-    width: 100%;
+/* Made height auto so it doesn't squash on mobile */
+.video-content {
+    margin-top: 10vh; 
+    width: 90%; 
     max-width: 600px;
+    height: auto; 
     border: 3px solid #ff69b4;
     border-radius: 15px;
     overflow: hidden;
@@ -19,71 +32,68 @@ body{
     position: relative;
 }
 
-#my-video{
-    width: 600px;
+/* Essential: Changed width from 600px to 100% */
+#my-video {
+    width: 100%;
     height: auto;
+    display: block;
 }
 
 .close-btn {
     position: absolute;
-    top: 10px; right: 15px;
+    top: 10px; 
+    right: 15px;
     color: #ff69b4;
-    font-size: 30px;
+    font-size: clamp(20px, 5vw, 30px);
     cursor: pointer;
     z-index: 210;
 }
 
-#blinking-hearts-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100dvh;
-    pointer-events: none; /* Allows clicking through to buttons */
-    z-index: -1; /* Sits behind content but could be above your main canvas */
-    overflow: hidden;
-}
-
-.blink-heart {
-    position: absolute;
-    color: #ff69b4; /* Aesthetic Pink */
-    filter: blur(1px); /* Softens the shape */
-    opacity: 0;
-    animation: blinkGlow 4s infinite ease-in-out;
-}
-
-@keyframes blinkGlow {
-    0%, 100% { 
-        opacity: 0; 
-        transform: scale(0.8);
-        text-shadow: 0 0 0px #ff69b4;
-    }
-    50% { 
-        opacity: 0.6; 
-        transform: scale(1.1);
-        text-shadow: 0 0 15px #ff69b4, 0 0 30px #ff1493; /* Neon Glow */
-    }
-}
-
+/* Removed margin-left: 720px */
 .back_button {
-    margin-left: 720px;
-    margin-top: 80px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
-
 
 .back {
     text-decoration: none;
     background-color: #ff69b4;
     border-radius: 25px;
-    padding: 15px 15px 15px 15px;
-    color: rgb(255, 255, 255);
+    padding: 12px 25px;
+    color: #fff;
     font-weight: bold;
-    border-color: #fff;
-    border-style:groove;
+    border: 3px groove #fff;
     transition: transform 0.4s ease;
+    display: inline-block;
 }
+
 .back:hover {
-    transform: scale(1.1); /* Makes it larger */
-  background-color: #ff69b4;
-  box-shadow: 0 0 20px #ff69b4; /* Pink neon glow */
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff69b4;
+}
+
+/* Background Hearts (remains fixed) */
+#blinking-hearts-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blink-heart {
+    position: absolute;
+    color: #ff69b4;
+    filter: blur(1px);
+    opacity: 0;
+    animation: blinkGlow 4s infinite ease-in-out;
+}
+
+@keyframes blinkGlow {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 0.6; transform: scale(1.1); text-shadow: 0 0 15px #ff69b4; }
 }
