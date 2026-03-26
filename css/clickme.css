@@ -39,10 +39,26 @@ h2 {
 .img-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center;     /* Centers items vertically */
+    
+    width: 100%;             /* Ensures it takes full width on mobile */
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto;          /* Centers the container itself */
+    
+    /* 1. Use gap instead of margins on images to keep them perfectly centered */
+    gap: 15px;               
+    padding: 10px;           /* Prevents images from hitting the screen edge */
+    box-sizing: border-box;
 }
+
+/* 2. Ensure the images themselves are responsive and centered */
+.img-container img {
+    max-width: 100%;         /* Prevents breaking the layout on tiny phones */
+    height: auto;
+    display: block;
+}
+
 
 /* Unified styling for images to ensure they scale */
 .special, .kiss, .memo, .music {

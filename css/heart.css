@@ -1,81 +1,98 @@
-html,
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background: #101010;
-  position: relative;
-
-  .pacifico-regular {
-    font-family: "Pacifico", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-family: "Pacifico", serif;
-  }
+:root {
+  --pink-neon: #ff69b4;
+  --soft-pink: rgba(255, 0, 127, 0.2);
 }
 
+body {
+  margin: 0;
+  background: #000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
 
-canvas {
+/* NEON HEART SVG */
+.neon-wrapper {
+  position: relative;
+  /* 1. Use 90% of the screen width on mobile, but stop growing at 500px on desktop */
+  width: 90vw; 
+  max-width: 500px; 
+  
+  /* 2. This keeps the heart a perfect square no matter the size */
+  aspect-ratio: 1 / 1; 
+  
+  margin: 0 auto; /* Centers the container */
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heart-svg {
   position: absolute;
+  top: 0;
+  left: 0;
+  /* 3. The SVG now fills 100% of its responsive parent */
   width: 100%;
   height: 100%;
+  pointer-events: none; /* Allows clicking the link through the heart */
+}
+
+.heart-path {
+  fill: transparent;
+  stroke: var(--pink-neon);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  /* Animation remains the same */
+  animation: drawHeart 6s forwards, neonPulse 3s infinite 6s;
+  filter: drop-shadow(0 0 10px var(--pink-neon));
 }
 
 
-.namebox {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* WELCOME TEXT */
+.welcome-text {
   text-align: center;
+  z-index: 3;
 }
 
-.namebox a {
+.main-title {
+  color: #ff69b4;
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px var(--pink-neon);
+}
+
+.subtitle {
+  color: #ff69b4;
+  font-size: 1.7rem;
+  text-shadow: 0 0 15px var(--pink-neon);
+  font-weight: 300;
   text-decoration: none;
-  color: #ff69b4;
-  margin: 0 auto;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 30px;
-  font-weight: bold;
+  margin-bottom: 25px;
+  position: relative; /* Allows z-index to work */
+  z-index: 10;        /* Moves it above the SVG */
 }
 
-.message {
-  font-family: "Archivo", sans-serif;
-  /* or 'Inter'/'Poppins' if you prefer */
-  font-size: 20px;
-  color: #fefefef4;
-  margin-top: 10px;
-  opacity: 0;
-  animation: fadeIn 2.5s ease-in-out 1.5s forwards;
+.heart-svg {
+    position: absolute;
+    z-index: 1;         /* Keeps the heart behind the text */
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-.copy {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: "Arial", sans-serif;
-  font-size: 22px;
-  color: #ff69b4;
-  text-align: center;
-}
-
-.copy a {
-  color: #6666669c;
-}
-
-.title {
-  color: #ff69b4;
-  text-align: center;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 50px;
+/* ANIMATIONS */
+@keyframes drawHeart {
+  to { stroke-dashoffset: 0; }
 }
 
 
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
 

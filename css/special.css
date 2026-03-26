@@ -29,7 +29,7 @@ body {
     height: 25px;
     /* background: var(--scroll-wood); */
     /* background-color: #fff; */
-    background-color: rgba(255, 119, 187, 0.721); /* Soft Pink */
+    background-color: #ff69b4; /* Soft Pink */
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     z-index: 10;
@@ -65,7 +65,7 @@ body {
     opacity: 1;
 }
 
-h2 { font-family: 'Pacifico', cursive; color: var(--neon-pink); margin-bottom: 20px; }
+h2 { font-family: 'Times New Roman', cursive; color: var(--neon-pink); margin-bottom: 20px; }
 p { line-height: 1.8; font-size: 15px; }
 
 /* MOBILE RESPONSIVE */
